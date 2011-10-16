@@ -130,6 +130,24 @@ void cylon(byte color, int spd, int frames) {
 }
   
   
+/*
+* NOISE
+*/
+void noise(byte color, int spd, int frames, int percentChance) {
+  for(int f = 0; f < frames; f++) {
+    for(int y = 0; y < MAX_Y; y++) {
+        for(int x = 0; x < MAX_X; x++) {
+           if(random(100) < percentChance) {
+             setLED(x,y, color, ON);
+           } else {
+             setLED(x,y, color, OFF);
+           }
+        }
+     }
+     delay(spd);
+   }
+}
+  
   
   
   

@@ -14,6 +14,8 @@
 #define GREEN 0x02
 #define BLUE  0x04
 
+#define WHITE RED|GREEN|BLUE
+
 #define OFF_BYTE 0x00 // Used to turn LED to off in updateBuffer
 
 #define BUFFER_SIZE (MAX_X * MAX_Y)
@@ -40,6 +42,9 @@ void loop() {
   
   //snake(GREEN, 50, 100);
   
-  cylon(RED, 15, 100);
+  //cylon(RED, 15, 100);
+
+  noise(GREEN, 0, 100, 50);
+
 
 }
