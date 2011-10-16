@@ -4,8 +4,8 @@
 #define CLOCK_PIN 11 // YELLOW
 #define DATA_PIN 12 // GREEN
 
-#define TOTAL_ROWS 8
-#define TOTAL_COLS 16    
+#define MAX_X 8
+#define MAX_Y 16    
 
 #define ON true
 #define OFF false
@@ -16,7 +16,7 @@
 
 #define OFF_BYTE 0x00 // Used to turn LED to off in updateBuffer
 
-#define BUFFER_SIZE (TOTAL_ROWS * TOTAL_COLS)
+#define BUFFER_SIZE (MAX_X * MAX_Y)
 
 unsigned int TIMER_PERIOD = 10000;
 
@@ -34,12 +34,12 @@ void setup() {
 
 void loop() {
   
-    clearDisplay();
-    
-    int colors[TOTAL_COLS] = {RED, RED|GREEN, GREEN, GREEN|BLUE, BLUE|RED, BLUE, RED|GREEN, RED};
-    
-    colorFill(10, colors);
-    
-    delay(50);
+  //grid();
+  
+  //theMatrix(GREEN, 50);
+  
+  //snake(GREEN, 50, 100);
+  
+  cylon(RED, 15, 100);
 
 }

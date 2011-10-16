@@ -15,7 +15,7 @@ void drawBufferContents() {
   uint8_t colGOn2 = 0;
   uint8_t colBOn2 = 0;
 
-  for(byte r1 = 0; r1 < TOTAL_ROWS; r1++) {
+  for(byte r1 = 0; r1 < MAX_X; r1++) {
     
     colROn = 0; colGOn = 0; colBOn = 0;
     
@@ -30,7 +30,7 @@ void drawBufferContents() {
     
     colROn2 = 0; colGOn2 = 0; colBOn2 = 0;
     
-    //for (byte c2 = 8; c2 < TOTAL_COLS; c2++) {
+    //for (byte c2 = 8; c2 < MAX_Y; c2++) {
     for (byte c2 = 0; c2 < 8; c2++) {   
         colROn2 |= *pixel & RED   ? _BV(c2) : 0;
         colGOn2 |= *pixel & GREEN ? _BV(c2) : 0;
@@ -73,22 +73,25 @@ void drawBufferContents() {
 }
 
 int getDisplayBufferIndex(int row, int col) {
-  return (row * TOTAL_COLS) + col;
+  return (row * MAX_Y) + col;
 }
 
 void setLED(int x, int y, byte color, boolean on) {
   
+  int rotated_x = y;
+  int rotated_y = 7 - x;
+  
   int new_x, new_y;
   
-  if ( x < 8 ) {
+  if ( rotated_x < 8 ) {
 
-    new_x = 15 - y;
-    new_y = 7 - x;
+    new_x = 15 - rotated_y;
+    new_y = 7 - rotated_x;
     
   } else {
 
-    new_x = 7 - y;
-    new_y = 15 - x; 
+    new_x = 7 - rotated_y;
+    new_y = 15 - rotated_x; 
   }
   
   int i = getDisplayBufferIndex(new_y, new_x);
@@ -101,9 +104,16 @@ uint8_t* getLED(int row, int col) {
   return &displayBuffer[getDisplayBufferIndex(row, col)];
 }
 
+void copyLED(int srcX, int srcY, int destX, int destY) {
+    int src = (srcX * MAX_Y) + srcY;
+    int dest = (destX * MAX_Y) + destY;
+    
+    displayBuffer[dest] = displayBuffer[src];
+}
+
 void setCol(int col, byte color, boolean on) {
 
-  for (int i = 0; i < TOTAL_COLS; i++) {
+  for (int i = 0; i < MAX_Y; i++) {
    
     setLED(i, col, color, on); 
     
@@ -113,7 +123,7 @@ void setCol(int col, byte color, boolean on) {
 
 void setRow(int row, byte color, boolean on) {
  
-  for (int i = 0; i < TOTAL_COLS; i++) {
+  for (int i = 0; i < MAX_Y; i++) {
    
     setLED(row, i, color, on);
   }
