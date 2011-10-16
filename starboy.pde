@@ -34,18 +34,12 @@ void setup() {
 
 void loop() {
   
-  clearDisplay();
-
-  setLED(0, 2, GREEN, ON);
-  
-  setLED(4, 2, BLUE, ON);
-  
-  setLED(4, 0, RED, ON);
-  
-  setLED(13, 0, RED|BLUE|GREEN, ON);
-  
-  setLED(14, 2, RED|GREEN, ON);
-  
-  delay(50);
+    clearDisplay();
+    
+    int colors[TOTAL_COLS] = {RED, RED|GREEN, GREEN, GREEN|BLUE, BLUE|RED, BLUE, RED|GREEN, RED};
+    
+    colorFill(10, colors);
+    
+    delay(50);
 
 }
