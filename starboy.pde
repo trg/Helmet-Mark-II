@@ -13,8 +13,12 @@
 #define RED   0x01
 #define GREEN 0x02
 #define BLUE  0x04
-
+#define YELLOW RED|GREEN
+#define PURPLE RED|BLUE
+#define CYAN GREEN|BLUE
 #define WHITE RED|GREEN|BLUE
+
+int COLORS[7] = {RED, YELLOW, GREEN, BLUE, CYAN, PURPLE, WHITE};
 
 #define OFF_BYTE 0x00 // Used to turn LED to off in updateBuffer
 
@@ -44,7 +48,18 @@ void loop() {
   
   //cylon(RED, 15, 100);
 
-  noise(GREEN, 0, 100, 50);
+  //noise(GREEN, 0, 100, 50);
 
+  //tom(WHITE, 50);
 
+  //rasta(50, 50);
+  
+  //totallyRandom(5000);
+  
+  //blinkRandomColors(50, 25);
+  
+  //blinkColor(GREEN, 50, 25);
+  
+  diagonalRainbowScroll(50, 50);
+  
 }

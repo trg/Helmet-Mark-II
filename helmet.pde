@@ -115,7 +115,7 @@ void setCol(int col, byte color, boolean on) {
 
   for (int i = 0; i < MAX_Y; i++) {
    
-    setLED(i, col, color, on); 
+    setLED(col, i, color, on); 
     
   }
   
@@ -123,9 +123,29 @@ void setCol(int col, byte color, boolean on) {
 
 void setRow(int row, byte color, boolean on) {
  
-  for (int i = 0; i < MAX_Y; i++) {
+  for (int x = 0; x < MAX_X; x++) {
    
-    setLED(row, i, color, on);
+    setLED(x, row, color, on);
+    
+  }
+}
+
+void setRowPattern(int row, byte pattern, byte color) {
+  
+  //row = (MAX_Y - 1) - row;
+  
+  byte colOn = B00000001;
+  
+  for (int c = (MAX_X - 1); c >= 0; c--) {
+    
+    uint8_t* rgb = getLED(row, c);
+  
+    if ((colOn & pattern) == colOn) {
+      
+      *rgb |= color;
+    }
+    
+    colOn <<= 1; 
   }
 }
 
@@ -138,4 +158,38 @@ void clearDisplay() {
   }
 }
 
+void blinkDisplay(int times, int spd) {
+  
+  uint8_t displayCopy[BUFFER_SIZE];
+  
+  for (int i = 0; i < BUFFER_SIZE; i++) {
+   
+    displayCopy[i] = displayBuffer[i]; 
+  }
+  
+  int timesBlinked = 0;
+  
+  while (timesBlinked < times) {
+   
+    for (int i = 0; i < BUFFER_SIZE; i++) {
+      
+      displayBuffer[i] = 0;
+    }
+    
+    delay(spd);
+    
+    for (int i = 0; i < BUFFER_SIZE; i++) {
+      
+      displayBuffer[i] = displayCopy[i]; 
+    }
+    
+    delay(spd);
+    
+    timesBlinked++;
+  }
+}
+
+byte getRandomColor() {
+  return COLORS[(int)random(0,7)];
+}
 
