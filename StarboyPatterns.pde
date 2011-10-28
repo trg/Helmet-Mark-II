@@ -123,31 +123,29 @@ void snake(byte color, int spd, int length) {
 
 void cylon(byte color, int spd, int frames) {
 
-   int x = 0;
+   int y = 0;
    bool goingRight = true;
 
    for(int frame = 0; frame < frames; frame++) {
-      
-     Serial.print(x);
      
       if (goingRight) {
-        x++;
+        y++;
       } else {
-        x--;
+        y--;
       }
       
       clearDisplay();
       
-      for(int y = 0; y < MAX_Y; y++) {
+      for(int x = 0; x < MAX_X; x++) {
          setLED(x, y, color, ON);
       }
       
       delay(spd);
       
-      if (x == MAX_X - 1)
+      if (y == MAX_Y - 1)
         goingRight = false;
   
-      if (x == 0) 
+      if (y == 0) 
         goingRight = true;
       
    }

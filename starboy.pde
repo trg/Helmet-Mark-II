@@ -40,19 +40,24 @@ void setup() {
 
 void loop() {
   
+  /* Good */
+  
+  //cylon(getRandomColor(), 15, 100);
+
+  //noise(getRandomColor(), 0, 100, 50);
+  
+  rasta(50, 50);
+  
+  /* broke */
+  
   //grid();
   
-  //theMatrix(GREEN, 50);
+  //theMatrix(GREEN, 50); // not working
   
-  //snake(GREEN, 50, 100);
-  
-  //cylon(RED, 15, 100);
+  //snake(GREEN, 50, 100); // not working
 
-  //noise(GREEN, 0, 100, 50);
+  //tom(WHITE, 50); // not working
 
-  //tom(WHITE, 50);
-
-  //rasta(50, 50);
   
   //totallyRandom(5000);
   
@@ -60,6 +65,8 @@ void loop() {
   
   //blinkColor(GREEN, 50, 25);
   
-  diagonalRainbowScroll(50, 50);
+  //diagonalRainbowScroll(50, 50);
+  
+  
   
 }
