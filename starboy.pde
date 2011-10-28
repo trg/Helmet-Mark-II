@@ -18,7 +18,7 @@
 #define CYAN GREEN|BLUE
 #define WHITE RED|GREEN|BLUE
 
-int COLORS[7] = {RED, YELLOW, GREEN, BLUE, CYAN, PURPLE, WHITE};
+byte COLORS[7] = {RED, YELLOW, GREEN, BLUE, CYAN, PURPLE, WHITE};
 
 #define OFF_BYTE 0x00 // Used to turn LED to off in updateBuffer
 
@@ -36,19 +36,59 @@ void setup() {
   
   Timer1.initialize(TIMER_PERIOD);
   Timer1.attachInterrupt(drawBufferContents);
+  
+  randomSeed(analogRead(0));
 }
 
 void loop() {
   
+  
   /* Good */
   
-  //cylon(getRandomColor(), 15, 100);
+  /*
+  
+  cylon(getRandomColor(), 15, 100);
 
-  //noise(getRandomColor(), 0, 100, 50);
+  noise(getRandomColor(), 0, 100, 50);
   
   rasta(50, 50);
   
-  /* broke */
+  totallyRandom(5000);
+  
+  blinkRandomColors(50, 25);
+  
+  fallingRain(getRandomColor(), 3, 30);
+  
+  diagonalRainbowScroll(50, 50);
+  
+  throughTheVoid(getRandomColor(), 10, 50);
+  
+  waveFromCenter(getRandomColor(), 20, 50);
+  
+  drawSquares(50, 50);
+  
+  fallingRows(RED, 15);
+  
+  fillingBalls(getRandomColor(), 3, 1000);
+  
+  */
+  
+  
+  
+  
+  /* work, but not that cool */
+  
+  //mario();
+  
+  //blinkEyes(100, 50);
+  
+  //blinkColor(WHITE, 50, 25);
+  
+  // marchingColorLines(10, 500);
+  
+  
+  
+  /* broken */
   
   //grid();
   
@@ -58,14 +98,8 @@ void loop() {
 
   //tom(WHITE, 50); // not working
 
+  // connectFour(RED, BLUE, 50);
   
-  //totallyRandom(5000);
-  
-  //blinkRandomColors(50, 25);
-  
-  //blinkColor(GREEN, 50, 25);
-  
-  //diagonalRainbowScroll(50, 50);
   
   
   

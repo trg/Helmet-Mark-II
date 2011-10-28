@@ -78,6 +78,10 @@ int getDisplayBufferIndex(int row, int col) {
 
 void setLED(int x, int y, byte color, boolean on) {
   
+  if (x < 0 || x >= MAX_X) return;
+  
+  if (y < 0 || y >= MAX_Y) return;
+  
   int rotated_x = y;
   int rotated_y = 7 - x;
   
@@ -96,7 +100,11 @@ void setLED(int x, int y, byte color, boolean on) {
   
   int i = getDisplayBufferIndex(new_y, new_x);
   
-  displayBuffer[i] = on ? (displayBuffer[i] | color) : (displayBuffer[i] & ~color);
+  displayBuffer[i] = B00000000; // turn LED off before setting color;
+  if (on) {
+    //displayBuffer[i] = on ? (displayBuffer[i] | color) : (displayBuffer[i] & ~color);
+    displayBuffer[i] = displayBuffer[i] | color;
+  }
 }
 
 uint8_t* getLED(int row, int col) {
@@ -111,21 +119,21 @@ void copyLED(int srcX, int srcY, int destX, int destY) {
     displayBuffer[dest] = displayBuffer[src];
 }
 
-void setCol(int col, byte color, boolean on) {
-
-  for (int i = 0; i < MAX_Y; i++) {
-   
-    setLED(col, i, color, on); 
-    
-  }
-  
-}
 
 void setRow(int row, byte color, boolean on) {
  
+  for (int y = 0; y < MAX_Y; y++) {
+   
+    setLED(row, y, color, on);
+    
+  }
+}
+
+void setCol(int col, byte color, boolean on) {
+ 
   for (int x = 0; x < MAX_X; x++) {
    
-    setLED(x, row, color, on);
+    setLED(x, col, color, on);
     
   }
 }
@@ -156,6 +164,19 @@ void clearDisplay() {
     displayBuffer[i] &= ~(RED|GREEN|BLUE);    
     
   }
+}
+
+void drawSquare(byte c, int x1, int y1, int x2, int y2) {
+  
+    if (y2 <= y1 || x2 <= x1) return;
+  
+    for( int x = x1; x <= x2; x++ ) {
+      for (int y = y1; y <= y2; y++ ) {
+        setLED(x,y,c,ON);
+      }
+    }    
+    
+
 }
 
 void blinkDisplay(int times, int spd) {
