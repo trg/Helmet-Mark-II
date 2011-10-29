@@ -45,47 +45,90 @@ void loop() {
   
   /* Good */
   
-  /*
+  //*
   
-  cylon(getRandomColor(), 15, 100);
+  switch(random(10)) {
+    case 0:
+    cylon(RED, 5, 200);
+    break;
+    
+    case 1:
+    noise(getRandomColor(), 0, 30, 50);
+    break;
+    
+    case 2:
+    throughTheVoid(getRandomNonWhiteColor(), 30, 25);
+    break;
+    
+    case 3:
+    rasta(25, 10);
+    break;
+    
+    case 4:
+    fallingRain(getRandomColor(), 3, 50);
+    break;
+    
+    case 5:
+    waveFromCenter(getRandomNonWhiteColor(), 30, 4*3);
+    break;
+    
+    case 6:
+    fillingBalls(getRandomColor(), 3, 1000);
+    break;
+    
+    case 7:
+    crazyRain(3, 25, COLORS, 6);
+    break;
+    
+    case 8:
+    for( int i = 0; i < 3; i++)
+      fallingRows(getRandomColor(), 15);
+    break;
+    
+    case 9:
+    equalizer(getRandomColor(), 50, 500);
+    break;
+    
+  }
 
-  noise(getRandomColor(), 0, 100, 50);
+
   
-  rasta(50, 50);
   
-  totallyRandom(5000);
+
   
-  blinkRandomColors(50, 25);
   
-  fallingRain(getRandomColor(), 3, 30);
   
-  diagonalRainbowScroll(50, 50);
   
-  throughTheVoid(getRandomColor(), 10, 50);
   
-  waveFromCenter(getRandomColor(), 20, 50);
-  
-  drawSquares(50, 50);
-  
-  fallingRows(RED, 15);
-  
-  fillingBalls(getRandomColor(), 3, 1000);
-  
-  */
   
   
   
   
   /* work, but not that cool */
   
+  //drawSquares(50, 25);
+  
   //mario();
   
-  //blinkEyes(100, 50);
+  //totallyRandom(500);
   
-  //blinkColor(WHITE, 50, 25);
+  //blinkRandomColors(50, 25);
   
-  // marchingColorLines(10, 500);
+  //diagonalRainbowScroll(50, 50);
   
+  
+  
+  
+  
+  /* work but pretty badly 
+  
+  blinkEyes(100, 50);
+  
+  blinkColor(WHITE, 50, 25);
+  
+  marchingColorLines(10, 500);
+  
+  */
   
   
   /* broken */

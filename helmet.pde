@@ -211,6 +211,9 @@ void blinkDisplay(int times, int spd) {
 }
 
 byte getRandomColor() {
-  return COLORS[(int)random(0,7)];
+  return COLORS[random(0,7)];
 }
 
+byte getRandomNonWhiteColor() {
+  return COLORS[random(0,6)];
+}

@@ -218,9 +218,9 @@ void totallyRandom(int frames) {
     
     int x = random(MAX_X);
     int y = random(MAX_Y);
-    byte color = (byte)random(7)+1;
     
-    setLED(x, y, WHITE, OFF);
+    byte color = getRandomColor();
+    
     setLED(x, y, color, ON);    
      
   }
@@ -233,13 +233,21 @@ void totallyRandom(int frames) {
 */
 
 void blinkRandomColors(int spd, int frames) {
+  
+  byte c = getRandomColor();
+  
   for( int f=0; f < frames; f++) {
     
     clearDisplay();
     
     delay(spd);
     
-    byte c = getRandomColor();
+    byte c1;
+    do {
+      c1 = getRandomColor();
+    } while (c == c1);
+ 
+    c = c1;
     
     for( int x = 0; x < MAX_X; x++) {
        for( int y = 0; y < MAX_Y; y++) {
@@ -380,7 +388,7 @@ void waveFromCenter(byte c, int spd, int frames) {
   
   for (int f = 0; f < frames; f++) {
     
-    int topRow = 4 - (f % 4);
+    int topRow = 3 - (f % 4);
     int bottomRow = 4 + (f % 4);
     
     clearDisplay();
@@ -424,6 +432,9 @@ void marchingColorLines(int spd, int frames) {
 }
 
 void drawSquares(int spd, int frames) {
+  
+  clearDisplay();
+  
   for (int f = 0; f < frames; f++) {
    
     int x1 = random(0, MAX_X - 2);
@@ -581,6 +592,69 @@ void fallingRain(byte color, int spd, int times) {
   }
   
 }
+
+
+void crazyRain(int spd, int times, byte colors[], int colorsLength) {
+  
+  clearDisplay();
+  
+  for (int f = 0; f < times; f++) {
+    
+     byte color = colors[f % colorsLength];
+    
+     int row = random(0, MAX_Y);
+     
+     int counter = 1;
+     if (random(2) == 1)
+       counter = -1;
+     
+     // Fill col
+     for (int h = 0; h < MAX_X; h++) {
+       setLED(h, (row + ((h * counter) % MAX_Y)), color, ON);
+       delay(spd);
+     }
+     
+     // Emtpy Col
+     /*for (int h = 0; h < MAX_X; h++) {
+       setLED(h, row, color, OFF);
+       delay(spd);
+     }*/
+  }
+  
+}
+
+void equalizer(byte c, int spd, int frames) {
+  
+  int heights[MAX_Y];
+  
+  for (int y = 0; y < MAX_Y; y++) {
+    heights[y] = random(MAX_X);
+  }
+  
+  clearDisplay();
+  
+  for (int f = 0; f < frames; f++) {
+  
+    for (int y = 0; y < MAX_Y; y++) {
+      
+      for (int x = (MAX_X - 1); x > heights[y]; x-- ) {
+        setLED(x,y,c,ON);
+      }
+      for (int x = heights[y]; x >= 0; x--) {
+        setLED(x,y,c,OFF);
+      }
+      
+      heights[y] += random(-1,2);
+      
+      if( heights[y] > 8 ) heights[y]--;
+      if( heights[y] < 0) heights[y]++;
+      
+    }    
+  }
+  
+}
+
+
 
 /*
 void connectFour(byte c1, byte c2, int spd) {
